@@ -1,6 +1,8 @@
 У нас есть ссылка которая делает ajax запрос:
 
-    link_to 'Cool work', cool_work_path, :remote => true
+```ruby
+link_to 'Cool work', cool_work_path, :remote => true
+```
 
 Мы хотим сделать какую-то обработку перед отправление запрос и после его выполнения.
 Для этого в пакете jquery-rails предусмотрены следующие события:
@@ -14,18 +16,22 @@
 
 Вернемся к нашей ссылке. Добавим к ней аттрибут `id` чтоб было легче не нее ссылаться.
 
-    link_to 'Cool work', cool_work_path, :remote => true, :id => 'cool_link'
+```ruby
+link_to 'Cool work', cool_work_path, :remote => true, :id => 'cool_link'
+```
 
 И в application.js пишем обработчик для событий.
 
-    $(function () {
-      $("#cool_link").live("ajax:before", function () {
-        $(this).html("Processing...")
-      };
-    });
+```ruby
+$(function () {
+  $("#cool_link").live("ajax:before", function () {
+    $(this).html("Processing...")
+  };
+});
 
-    $(function () {
-      $("#cool_link").live("ajax:before", function () {
-        $(this).html("Cool work")
-      };
-    });
+$(function () {
+  $("#cool_link").live("ajax:before", function () {
+    $(this).html("Cool work")
+  };
+});
+```

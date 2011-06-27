@@ -6,4 +6,6 @@
 
 Так же удобно повесить ее на горячу клавишу:
 
-    map <silent> <Leader>ts :%s/\s*$//g<CR>
+```vim
+map <silent> <Leader>ts :%s/\s*$//g<CR>
+```
