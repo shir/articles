@@ -2,13 +2,16 @@ require 'redcarpet'
 require 'albino'
 require 'nokogiri'
 
+ROOT_DIR = File.expand_path(File.join('..', '..', '..'), __FILE__)
+MD_DIR = File.join(ROOT_DIR, 'markdown')
+HTML_DIR = File.join(ROOT_DIR, 'html')
 MD_EXTENSION = '.md'
-ARTICLES_DIRS = %w[rails ruby vim]
-HTML_OUTPUT_DIR = 'html'
 
-def output_file(dir, input_file)
-  base_file_name = File.basename(input_file, MD_EXTENSION) + '.html'
-  File.expand_path(File.join('..', 'html', dir, base_file_name), __FILE__)
+def output_file(input_file)
+  puts Regexp.escape(MD_DIR)
+  puts Regexp.escape(HTML_DIR)
+  input_file.gsub(/^#{Regexp.escape(MD_DIR)}/, Regexp.escape(HTML_DIR)).
+    gsub(/#{Regexp.escape(MD_EXTENSION)}$/, '.html')
 end
 
 def syntax_highlighter(html)
@@ -19,9 +22,10 @@ def syntax_highlighter(html)
   doc.to_s
 end
 
-def convert_file_to_html(file, output_file)
+def convert_file_to_html(input_file, output_file)
+  puts "Processing #{input_file} to #{output_file}"
   options = [:autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
-  result = syntax_highlighter(Redcarpet.new(IO.read(file), *options).to_html)
+  result = syntax_highlighter(Redcarpet.new(IO.read(input_file), *options).to_html)
   FileUtils.makedirs(File.dirname(output_file))
   File.open(output_file, 'w') { |f| f.write(result) }
 end
@@ -29,13 +33,8 @@ end
 namespace :convert do
   desc 'Convert all articles to HTML format'
   task :html do
-    ARTICLES_DIRS.each do |dir|
-      Dir.foreach(File.expand_path(File.join('..', dir), __FILE__)) do |file|
-        if File.extname(file) == MD_EXTENSION
-          input_file = File.expand_path(File.join('..', dir, file), __FILE__)
-          convert_file_to_html(input_file, output_file(dir, input_file))
-        end
-      end
+    Dir.glob(File.join(MD_DIR, '**', "*#{MD_EXTENSION}")).each do |file|
+      convert_file_to_html(file, output_file(file))
     end
   end
 end
