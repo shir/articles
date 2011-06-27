@@ -4,12 +4,13 @@ Just articles written by me.
 
 ## Rails
 
-* [Remote links and before/after processing](https://github.com/shir/articles/blob/master/rails/remote-before-events.md)
+* [Remote links and before/after processing](https://github.com/shir/articles/blob/master/markdown/rails/remote-before-events.md)
 
 ## Ruby
 
-* [Log function return value](https://github.com/shir/articles/blob/master/ruby/log-return-value.md)
+* [Log function return value](https://github.com/shir/articles/blob/master/markdown/ruby/log-return-value.md)
+* [Variables in regexp](https://github.com/shir/articles/blob/master/markdown/ruby/variables-in-regexp.md)
 
 ## Vim
 
-* [Remove trailing spaces](https://github.com/shir/articles/blob/master/vim/remove-trailling-spaces.md)
+* [Remove trailing spaces](https://github.com/shir/articles/blob/master/markdown/vim/remove-trailling-spaces.md)
