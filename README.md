@@ -19,10 +19,10 @@ Just articles written by me.
 
 Install required gems via bundler:
 
-    bundle install
+    $ bundle install
 
 Now you can use the Rake task to convert all articles to HTML format.
 
-    rake convert:html
+    $ rake convert:html
 
 All HTML output will be in `html` directory in project root.
