@@ -21,6 +21,10 @@ Install required gems via bundler:
 
     $ bundle install
 
+Install [Pygments](http://pygments.org/). You can do it in Mac OS X with command:
+
+    $ sudo easy_install pygments
+
 Now you can use the Rake task to convert all articles to HTML format.
 
     $ rake convert:html
