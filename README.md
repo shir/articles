@@ -14,3 +14,15 @@ Just articles written by me.
 ## Vim
 
 * [Remove trailing spaces](https://github.com/shir/articles/blob/master/markdown/vim/remove-trailling-spaces.md)
+
+# Converting
+
+Install required gems via bundler:
+
+    bundle install
+
+Now you can use the Rake task to convert all articles to HTML format.
+
+    rake convert:html
+
+All HTML output will be in `html` directory in project root.
