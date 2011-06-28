@@ -6,10 +6,11 @@ ROOT_DIR = File.expand_path(File.join('..', '..', '..'), __FILE__)
 MD_DIR = File.join(ROOT_DIR, 'markdown')
 HTML_DIR = File.join(ROOT_DIR, 'html')
 MD_EXTENSION = '.md'
+HTML_EXTENSION = '.html'
 
 def output_file(input_file)
   input_file.gsub(/^#{Regexp.escape(MD_DIR)}/, Regexp.escape(HTML_DIR)).
-    gsub(/#{Regexp.escape(MD_EXTENSION)}$/, '.html')
+    gsub(/#{Regexp.escape(MD_EXTENSION)}$/, HTML_EXTENSION)
 end
 
 def syntax_highlighter(html)
@@ -36,5 +37,10 @@ namespace :convert do
     Dir.glob(File.join(MD_DIR, '**', "*#{MD_EXTENSION}")).each do |file|
       convert_file_to_html(file, output_file(file))
     end
+  end
+
+  desc 'Remove all HTML ouput files'
+  task [:html, :clear] do
+    FileUtils.remove_dir(HTML_DIR)
   end
 end
