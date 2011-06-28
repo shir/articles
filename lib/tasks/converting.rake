@@ -8,8 +8,6 @@ HTML_DIR = File.join(ROOT_DIR, 'html')
 MD_EXTENSION = '.md'
 
 def output_file(input_file)
-  puts Regexp.escape(MD_DIR)
-  puts Regexp.escape(HTML_DIR)
   input_file.gsub(/^#{Regexp.escape(MD_DIR)}/, Regexp.escape(HTML_DIR)).
     gsub(/#{Regexp.escape(MD_EXTENSION)}$/, '.html')
 end
@@ -23,9 +21,11 @@ def syntax_highlighter(html)
 end
 
 def convert_file_to_html(input_file, output_file)
-  puts "Processing #{input_file} to #{output_file}"
   options = [:autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
-  result = syntax_highlighter(Redcarpet.new(IO.read(input_file), *options).to_html)
+  result = Redcarpet.new(IO.read(input_file), *options).to_html
+  unless ENV['NO_HIGHLIGHT']
+    result = syntax_highlighter(result)
+  end
   FileUtils.makedirs(File.dirname(output_file))
   File.open(output_file, 'w') { |f| f.write(result) }
 end
