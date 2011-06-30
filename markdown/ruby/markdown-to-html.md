@@ -1,6 +1,6 @@
 # Конвертация Markdown в HTML с подсветкой кода.
 
-Недавно начал использовать Markdown для написания сових статей.
+Недавно начал использовать Markdown для написания своих статей.
 Но очень не хватало подсветки синтакисиса.
 
 Тут, как нельзя кстати, вышел railscast [Markdown with Redcarpet](http://railscasts.com/episodes/272-markdown-with-redcarpet).
