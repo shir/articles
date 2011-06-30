@@ -24,7 +24,7 @@ def syntax_highlighter(html)
     pre.replace Albino.colorize(pre.text.rstrip, pre[:lang])
   end
   doc.search("//body").first.children.first.before("<style type=\"text/css\">#{style}</style>")
-  doc.to_s
+  doc.to_html(:encoding => 'utf-8')
 end
 
 def convert_file_to_html(input_file, output_file)
