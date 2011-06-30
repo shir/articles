@@ -22,7 +22,7 @@ link_to 'Cool work', cool_work_path, :remote => true, :id => 'cool_link'
 
 И в application.js пишем обработчик для событий.
 
-```ruby
+```javascript
 $(function () {
   $("#cool_link").live("ajax:before", function () {
     $(this).html("Processing...")
