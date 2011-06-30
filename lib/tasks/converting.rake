@@ -23,7 +23,9 @@ def syntax_highlighter(html)
   doc.search("//pre[@lang]").each do |pre|
     pre.replace Albino.colorize(pre.text.rstrip, pre[:lang])
   end
-  doc.search("//body").first.children.first.before("<style type=\"text/css\">#{style}</style>")
+  if ENV['INCLUDE_CSS']
+    doc.search("//body").first.children.first.before("<style type=\"text/css\">#{style}</style>")
+  end
   doc.to_html(:encoding => 'utf-8')
 end
 
