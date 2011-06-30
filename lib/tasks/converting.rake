@@ -7,10 +7,15 @@ MD_DIR = File.join(ROOT_DIR, 'markdown')
 HTML_DIR = File.join(ROOT_DIR, 'html')
 MD_EXTENSION = '.md'
 HTML_EXTENSION = '.html'
+STYLE_FILE = File.join(ROOT_DIR, 'styles', 'colorful.css')
 
 def output_file(input_file)
   input_file.gsub(/^#{Regexp.escape(MD_DIR)}/, Regexp.escape(HTML_DIR)).
     gsub(/#{Regexp.escape(MD_EXTENSION)}$/, HTML_EXTENSION)
+end
+
+def style
+  @style ||= IO.read(STYLE_FILE)
 end
 
 def syntax_highlighter(html)
@@ -18,6 +23,7 @@ def syntax_highlighter(html)
   doc.search("//pre[@lang]").each do |pre|
     pre.replace Albino.colorize(pre.text.rstrip, pre[:lang])
   end
+  doc.search("//body").first.children.first.before("<style type=\"text/css\">#{style}</style>")
   doc.to_s
 end
 
