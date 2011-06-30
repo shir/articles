@@ -47,7 +47,7 @@ namespace :convert do
     end
   end
 
-  desc 'Remove all HTML ouput files'
+  desc 'Remove all HTML output files'
   task [:html, :clear] do
     FileUtils.remove_dir(HTML_DIR)
   end
