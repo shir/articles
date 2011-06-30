@@ -10,6 +10,7 @@ Just articles written by me.
 
 * [Log function return value](https://github.com/shir/articles/blob/master/markdown/ruby/log-return-value.md)
 * [Variables in regexp](https://github.com/shir/articles/blob/master/markdown/ruby/variables-in-regexp.md)
+* [Converting from markdown to html with syntax highlight](https://github.com/shir/articles/blob/master/markdown/ruby/markdown-to-html.md)
 
 ## Vim
 
