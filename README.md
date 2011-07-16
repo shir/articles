@@ -5,6 +5,7 @@ Just articles written by me.
 ## Rails
 
 * [Remote links and before/after processing](https://github.com/shir/articles/blob/master/markdown/rails/remote-before-events.md)
+* [Dots and other symbols in routes](https://github.com/shir/articles/blob/master/markdown/rails/dots-in-routes.md)
 
 ## Ruby
 
