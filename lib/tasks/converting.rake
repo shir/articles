@@ -29,21 +29,31 @@ def syntax_highlighter(html)
   doc.to_html(:encoding => 'utf-8')
 end
 
-def convert_file_to_html(input_file, output_file)
-  options = [:autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
-  result = Redcarpet.new(IO.read(input_file), *options).to_html
-  unless ENV['NO_HIGHLIGHT']
-    result = syntax_highlighter(result)
+def convert_file_to_html(input_file, output_file, options = {})
+  if options[:force] || !File.exists?(output_file) || (File.ctime(input_file) >= File.ctime(output_file))
+    puts "Convert #{File.basename(input_file)}"
+    options = [:autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
+    result = Redcarpet.new(IO.read(input_file), *options).to_html
+    unless ENV['NO_HIGHLIGHT']
+      result = syntax_highlighter(result)
+    end
+    FileUtils.makedirs(File.dirname(output_file))
+    File.open(output_file, 'w') { |f| f.write(result) }
   end
-  FileUtils.makedirs(File.dirname(output_file))
-  File.open(output_file, 'w') { |f| f.write(result) }
 end
 
 namespace :convert do
-  desc 'Convert all articles to HTML format'
+  desc 'Convert all modified articles to HTML format'
   task :html do
     Dir.glob(File.join(MD_DIR, '**', "*#{MD_EXTENSION}")).each do |file|
       convert_file_to_html(file, output_file(file))
+    end
+  end
+
+  desc 'Convert all articles to HTML format'
+  task [:html, :force] do
+    Dir.glob(File.join(MD_DIR, '**', "*#{MD_EXTENSION}")).each do |file|
+      convert_file_to_html(file, output_file(file), :force => true)
     end
   end
 
